@@ -1,7 +1,7 @@
 package algorithm.dijktra;
 
 import java.util.Map;
-import node.Node;
+import algorithm.dijktra.node.Node;
 
 public class Main {
 

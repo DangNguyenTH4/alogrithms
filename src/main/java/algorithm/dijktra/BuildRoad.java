@@ -2,7 +2,7 @@ package algorithm.dijktra;
 
 import java.util.HashMap;
 import java.util.Map;
-import node.Node;
+import algorithm.dijktra.node.Node;
 
 public class BuildRoad {
   public Map<String, Node> buildNodesSimple(){

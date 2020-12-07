@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
-import node.Node;
+import algorithm.dijktra.node.Node;
 
 public class ImplementDijktraAlgorithm {
 
@@ -22,7 +22,7 @@ public class ImplementDijktraAlgorithm {
     while(!queue.isEmpty()){
       Node currentNode = queue.poll();
       fromANode(currentNode, targetNode );
-      //set node is visited. For ignore.
+      //set algorithm.dijktra.node is visited. For ignore.
       currentNode.setVisited(true);
     }
 
@@ -39,10 +39,10 @@ public class ImplementDijktraAlgorithm {
     if(node.visited()){
       return;
     }
-    //fill min value to next node.
+    //fill min value to next algorithm.dijktra.node.
     for(Entry<Node, Integer> entryNode : node.getAdjacentNodes().entrySet()){
       Node nextNode = entryNode.getKey();
-      //if node was visited. Ignore
+      //if algorithm.dijktra.node was visited. Ignore
       if(nextNode.visited()){
         continue;
       }
@@ -67,10 +67,10 @@ public class ImplementDijktraAlgorithm {
     if(targetNode.getMinValue() != null && node.getMinValue() > targetNode.getMinValue()){
       return;
     }
-    //fill min value to next node.
+    //fill min value to next algorithm.dijktra.node.
     for(Entry<Node, Integer> entryNode : node.getAdjacentNodes().entrySet()){
       Node nextNode = entryNode.getKey();
-      //if node was visited. Ignore
+      //if algorithm.dijktra.node was visited. Ignore
       if(nextNode.visited()){
         continue;
       }

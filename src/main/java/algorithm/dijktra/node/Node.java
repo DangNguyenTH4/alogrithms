@@ -1,4 +1,4 @@
-package node;
+package algorithm.dijktra.node;
 
 import java.util.HashMap;
 import java.util.Map;
