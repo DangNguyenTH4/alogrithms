@@ -8,7 +8,7 @@ public class MainHouse {
     try {
       ImplementBacktrackKnight implementBacktrackKnight = new ImplementBacktrackKnight();
       long time = System.currentTimeMillis();
-      implementBacktrackKnight.go(new Cell(4, 1), null, 8);
+      implementBacktrackKnight.go(new Cell(1, 1), null, 7);
       System.out.println(System.currentTimeMillis()-time);
     }catch (Exception ex){
       ex.printStackTrace();

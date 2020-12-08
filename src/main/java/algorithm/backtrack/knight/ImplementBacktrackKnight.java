@@ -4,7 +4,9 @@ import algorithm.backtrack.knight.cell.Cell;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -12,15 +14,15 @@ public class ImplementBacktrackKnight {
   int n;
   Stack<Cell> steps = new Stack<>();
   Set<Cell> visitedCell = new HashSet<>();
-
+  Map<String, Cell> allCell = new HashMap<>();
   public  void go(Cell startPoint, Set<Cell> matrix, int n) throws IOException {
 
-    if(startPoint.getCol()< 1 || startPoint.getCol()>n){
+    allCell = this.buildCell(n);
+    String key = startPoint.getRow()+""+startPoint.getCol();
+    if(!allCell.containsKey(key)){
       return;
     }
-    if(startPoint.getRow() < 1 || startPoint.getRow()>n){
-      return;
-    }
+    startPoint = allCell.get(key);
     File file = new File(n+"-"+System.currentTimeMillis()+".txt");
     file.createNewFile();
     FileWriter writer = new FileWriter(file);
@@ -63,12 +65,9 @@ public class ImplementBacktrackKnight {
           writer.write(builder.toString()+"\n");
           System.out.println();
         }
-//        try {
-//          Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//          e.printStackTrace();
-//        }
-
+          if(steps.size()==1){
+            System.out.println("Debug!");
+          }
       }
       else{
         nextCell.setVisited(true);
@@ -87,86 +86,194 @@ public class ImplementBacktrackKnight {
   }
 
   private Cell getNextCell(Cell currentCell){
-    Cell nextCell ;
+    Cell nextCellTemp, result = null;
     int r, c;
-
+    int currentVisitedCell = 0;
+    int minUnvisitedCellTemp;
+    String key;
     //1,2
     c = currentCell.getCol()+1;
     r = currentCell.getRow()+2;
+    key = r+""+c;
     //need inside the table;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
       //cell not be visited before; and not just visited by currentCell
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //2,1
     c = currentCell.getCol()+2;
     r = currentCell.getRow()+1;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //2,-1
     c = currentCell.getCol()+2;
     r = currentCell.getRow()-1;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //1,-2
     c = currentCell.getCol()+1;
     r = currentCell.getRow()-2;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //-1,-2
     c = currentCell.getCol()-1;
     r = currentCell.getRow()-2;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //-2,-1
     c = currentCell.getCol()-2;
     r = currentCell.getRow()-1;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //-2,1
     c = currentCell.getCol()-2;
     r = currentCell.getRow()+1;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
     //-1,2
     c = currentCell.getCol()-1;
     r = currentCell.getRow()+2;
-    if(isValidCell(n,r,c)){
-      nextCell = new Cell(r,c);
-      if(!visitedCell.contains(nextCell) && !currentCell.getCacheVisited().contains(nextCell)){
-        return  nextCell;
+    key = r+""+c;
+    //need inside the table;
+    if(allCell.containsKey(key)){
+      nextCellTemp = allCell.get(key);
+      //cell not be visited before; and not just visited by currentCell
+      if(!nextCellTemp.isVisited() && !currentCell.getCacheVisited().contains(nextCellTemp) && (minUnvisitedCellTemp = this.countCellVisited(nextCellTemp))>currentVisitedCell){
+        result = nextCellTemp;
+        currentVisitedCell = minUnvisitedCellTemp;
       }
     }
-    return null;
+    return result;
   }
   private boolean isValidCell(int n, int r, int c){
     return r >= 1 && c >= 1 && r <= n && c <= n;
   }
+  private Map<String, Cell> buildCell(int n){
+    Map<String,Cell> result = new HashMap<>();
+    for(int i=1;i<=n;i++){
+      for(int j=1;j<=n;j++){
+        result.put(i+""+j,new Cell(i,j));
+      }
+    }
+    return result;
+  }
+  private int countCellVisited(Cell cell){
+    int result = 0;
+    Cell nextCellTemp;
+    int r, c;
+    String key;
+    //1,2
+    c = cell.getCol()+1;
+    r = cell.getRow()+2;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //2,1
+    c = cell.getCol()+2;
+    r = cell.getRow()+1;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //2,-1
+    c = cell.getCol()+2;
+    r = cell.getRow()-1;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //1,-2
+    c = cell.getCol()+1;
+    r = cell.getRow()-2;
+    key = r+""+c;
+    result += this.getVisited(key);
+    //-1,-2
+    c = cell.getCol()-1;
+    r = cell.getRow()-2;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //-2,-1
+    c = cell.getCol()-2;
+    r = cell.getRow()-1;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //-2,1
+    c = cell.getCol()-2;
+    r = cell.getRow()+1;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    //-1,2
+    c = cell.getCol()-1;
+    r = cell.getRow()+2;
+    key = r+""+c;
+    //need inside the table;
+    result += this.getVisited(key);
+    return result;
+  }
+
+  private int getVisited(String key){
+    int result = 0;
+    if(allCell.containsKey(key)){
+      //cell not be visited before; and not just visited by currentCell
+      if(allCell.get(key).isVisited()){
+        result++;
+      }
+    }
+    return result;
+  }
+
+
 }
