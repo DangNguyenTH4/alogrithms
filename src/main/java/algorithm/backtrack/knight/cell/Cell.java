@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Cell {
+public class Cell implements Cloneable {
   public Cell(int row, int col){
     this.row = row;
     this.col = col;
@@ -80,5 +80,11 @@ public class Cell {
   @Override
   public String toString() {
     return String.format("(%d,%d),", row,col);
+  }
+
+  //Shalow Copy
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    return (Cell)super.clone();
   }
 }
